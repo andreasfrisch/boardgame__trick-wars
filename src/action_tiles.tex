@@ -1,0 +1,36 @@
+\documentclass[a4paper]{article}
+\input{include/libs.tex}
+\input{include/colors.tex}
+\input{include/sizes.tex}
+\input{include/tile_definitions.tex}
+
+\begin{document}
+\begin{center}
+\pagestyle{empty}
+\hyphenpenalty=10000
+
+\foreach \c in {white, black}{
+	\begin{tikzpicture}
+		\tileBorder
+		\tileIcon{build_\c.png}
+		\tileText{\c}{Build}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\tileBorder
+		\tileIcon{recruit_\c.png}
+		\tileText{\c}{Recruit}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\tileBorder
+		\tileIcon{move_\c.png}
+		\tileText{\c}{Move}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\tileBorder
+		\tileIcon{fight_\c.png}
+		\tileText{\c}{Fight}
+	\end{tikzpicture}
+}
+
+\end{center}
+\end{document}

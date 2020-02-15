@@ -1,0 +1,98 @@
+\def\shapeCard{(0,0) rectangle (\cardwidth,\cardheight)}
+\def\shapeInnerBorder{(0.25,0.25) rectangle (\cardwidth-0.25,\cardheight-0.25)}
+
+\tikzset{
+	cardcorners/.style={
+		rounded corners=0.2cm
+	}
+}
+
+\newcommand{\cardborder}{
+	\draw[dark_grey,cardcorners] \shapeCard;
+}
+
+\newcommand{\cardMiddle}{
+	\draw[dark_grey] (0.15*\cardwidth,0.5*\cardheight) -- (0.85*\cardwidth,0.5*\cardheight);
+}
+
+\newcommand{\coloredBorder}[1]{
+	\clip[cardcorners] \shapeInnerBorder;
+	\draw[line width=0.2cm,#1,cardcorners] \shapeInnerBorder;
+}
+\newcommand{\circleCorners}[1]{
+	\clip \shapeInnerBorder;
+	\draw[line width=0.1cm,#1,fill=white] (0.25,0.25) circle (0.5cm);
+	\draw[line width=0.1cm,#1,fill=white] (0.25,\cardheight-0.25) circle (0.5cm);
+	\draw[line width=0.1cm,#1,fill=white] (\cardwidth-0.25,0.25) circle (0.5cm);
+	\draw[line width=0.1cm,#1,fill=white] (\cardwidth-0.25,\cardheight-0.25) circle (0.5cm);
+}
+\newcommand{\squareCorners}[1]{
+	\clip \shapeInnerBorder;
+	\draw[line width=0.1cm,#1,fill=white] (0,0) rectangle (0.75,0.75);
+	\draw[line width=0.1cm,#1,fill=white] (0,\cardheight) rectangle (0.75,\cardheight-0.75);
+	\draw[line width=0.1cm,#1,fill=white] (\cardwidth,0) rectangle (\cardwidth-0.75,0.75);
+	\draw[line width=0.1cm,#1,fill=white] (\cardwidth,\cardheight-0) rectangle (\cardwidth-0.75,\cardheight-0.75);
+}
+\newcommand{\triangleCorners}[1]{
+	\clip \shapeInnerBorder;
+	\draw[line width=0.1cm,#1,fill=white] (0,0) -- (0,1) -- (1,0) -- cycle;
+	\draw[line width=0.1cm,#1,fill=white] (\cardwidth,0) -- (\cardwidth,1) -- (\cardwidth-1,0) -- cycle;
+	\draw[line width=0.1cm,#1,fill=white] (\cardwidth,\cardheight) -- (\cardwidth,\cardheight-1) -- (\cardwidth-1,\cardheight) -- cycle;
+	\draw[line width=0.1cm,#1,fill=white] (0,\cardheight) -- (0,\cardheight-1) -- (1,\cardheight) -- cycle;
+}
+
+\newcommand{\suitSquare}[1]{
+	\fill [#1]    (0.5*\cardwidth-0.5, \cardheight-0.5)
+		rectangle (0.5*\cardwidth+0.5, \cardheight-1.5);
+	\fill [#1]    (0.5*\cardwidth-0.5, 0.5)
+		rectangle (0.5*\cardwidth+0.5, 1.5);
+}
+
+\newcommand{\suitTriangle}[1]{
+	\fill [#1] (0.5*\cardwidth-0.6, \cardheight-1.5)
+			-- (0.5*\cardwidth+0.6, \cardheight-1.5)
+			-- (0.5*\cardwidth, \cardheight-0.5)
+			-- cycle;
+	\fill [#1] (0.5*\cardwidth-0.6, 1.5)
+			-- (0.5*\cardwidth+0.6, 1.5)
+			-- (0.5*\cardwidth, 0.5)
+			-- cycle;
+}
+
+\newcommand{\suitCircle}[1]{
+	\fill [#1] (0.5*\cardwidth, \cardheight-1) circle (0.5cm);
+	\fill [#1] (0.5*\cardwidth, 1) circle (0.5cm);
+}
+
+\newcommand{\cardvalue}[2]{
+	\node [text width=1cm] at (1, 1.2) {
+		\begin{center}
+			\color{#2}\rotatebox{180}{\Huge \textbf #1}
+		\end{center}
+	};
+	\node [text width=1cm] at (\cardwidth-1, 1.2) {
+		\begin{center}
+			\color{#2}\rotatebox{180}{\Huge \textbf #1}
+		\end{center}
+	};
+	\node [text width=1cm] at (1, \cardheight-1) {
+		\begin{center}
+			\color{#2}{\Huge \textbf #1}
+		\end{center}
+	};
+	\node [text width=1cm] at (\cardwidth-1, \cardheight-1) {
+		\begin{center}
+			\color{#2}{\Huge \textbf #1}
+		\end{center}
+	};
+}
+
+\newcommand{\effect}[1] {
+	\node [text width=4cm] at (0.5*\cardwidth, 0.5*\cardheight+1.25) {
+		\parbox[c]{4cm}{\centering \large #1}
+	};
+	\node [text width=4cm] at (0.5*\cardwidth, 0.5*\cardheight-1.25) {
+		\rotatebox{180}{\parbox[c]{4cm}{\centering \large #1}}
+	};
+}
+

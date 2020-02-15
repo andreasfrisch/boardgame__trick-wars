@@ -1,0 +1,24 @@
+\def\shapeTile{(0,0) rectangle (\tilewidth,\tileheight)}
+
+\tikzset{
+	cardcorners/.style={
+		rounded corners=0.2cm
+	}
+}
+
+\newcommand{\tileBorder}{
+	\draw[dark_grey,cardcorners,fill=dark_grey] \shapeTile;
+}
+
+\newcommand{\tileIcon}[1]{
+	\node (image) at (0.5*\tilewidth, 0.5*\tileheight+0.5) {
+		\includegraphics[height=3cm]{icons/#1}
+	};
+}
+
+\newcommand{\tileText}[2]{
+	\node [text width=4cm,#1] at (0.5*\tilewidth, 0.75) {
+		\parbox[c]{4cm}{\centering \huge \sc #2}
+	};
+}
+
